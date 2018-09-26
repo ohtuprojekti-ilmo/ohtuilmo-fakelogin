@@ -10,41 +10,45 @@ var users = [
         password: "password",
         student_number: "123",
         first_names: "test",
-        last_names: "tester"
+        last_name: "tester"
     },
     {
         username: "username2",
         password: "password2",
         student_number: "456",
         first_names: "test2",
-        last_names: "tester2"
+        last_name: "tester2"
     }
 ]
 
 function authenticate(username, password) {
     const index = users.findIndex((user) => user.username === username)
     if (index > -1) {
-        return users[index]
+        const user = users[index]
+        if (user.password === password) {
+            return user
+        }
     }
     return false
 }
 
 app.post('/api/login', (req, res) => {
-    console.log(req.headers)
-    console.log(req.body.username)
-    console.log(req.body.password)
-    const user = authenticate(req.body.username, req.body.password)
-    if (user) {
-        console.log("asdf")
-        res.status(200).json(
-            {
-                student_number: user.student_number,
-                first_names: user.first_names,
-                last_names: user.last_names
-            }
-        )
+    if (req.body.username && req.body.password) {
+        const user = authenticate(req.body.username, req.body.password)
+        if (user) {
+            res.status(200).json(
+                {
+                    username: user.username,
+                    student_number: user.student_number,
+                    first_names: user.first_names,
+                    last_name: user.last_name
+                }
+            )
+        } else {
+            res.status(200).json({ error: "wrong credentials" })
+        }
     } else {
-        res.status(400).json({ error: "incorrect login" })
+        res.status(500).send()
     }
 })
 
