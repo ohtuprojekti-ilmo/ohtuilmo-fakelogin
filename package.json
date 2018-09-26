@@ -1,0 +1,19 @@
+{
+  "name": "ohtuilmo-fakelogin",
+  "version": "1.0.0",
+  "description": "fake login service for ohtuilmo project",
+  "main": "index.js",
+  "scripts": {
+    "watch": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "katantti",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.4"
+  }
+}
