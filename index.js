@@ -36,6 +36,7 @@ app.post('/api/login', (req, res) => {
     if (req.body.username && req.body.password) {
         const user = authenticate(req.body.username, req.body.password)
         if (user) {
+            console.log(200)
             res.status(200).json(
                 {
                     username: user.username,
@@ -48,6 +49,7 @@ app.post('/api/login', (req, res) => {
             res.status(200).json({ error: "wrong credentials" })
         }
     } else {
+        console.log(500)
         res.status(500).send()
     }
 })
